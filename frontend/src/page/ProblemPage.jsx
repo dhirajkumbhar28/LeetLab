@@ -68,11 +68,16 @@ const ProblemPage = () => {
     }
   }, [activeTab, id]);
 
+  // Fixed: Separate useEffect for initializing language and code when problem loads
   useEffect(() => {
-    if (problem) {
-      setCode(
-        problem.codeSnippets?.[selectedLanguage] || submission?.sourceCode || ""
-      );
+    if (problem && problem.codeSnippets) {
+      // Set default language if available languages changed
+      const availableLanguages = Object.keys(problem.codeSnippets);
+      if (availableLanguages.length > 0 && !availableLanguages.includes(selectedLanguage)) {
+        setSelectedLanguage(availableLanguages[0]);
+      }
+      
+      // Set test cases
       setTestCases(
         problem.testcases?.map((tc) => ({
           input: tc.input,
@@ -80,13 +85,30 @@ const ProblemPage = () => {
         })) || []
       );
     }
+  }, [problem]);
+
+  // Fixed: Separate useEffect for handling code changes when language changes
+  useEffect(() => {
+    if (problem && problem.codeSnippets) {
+      const templateCode = problem.codeSnippets[selectedLanguage];
+      if (templateCode) {
+        setCode(templateCode);
+      } else {
+        // Fallback to first available language template
+        const availableLanguages = Object.keys(problem.codeSnippets);
+        if (availableLanguages.length > 0) {
+          setCode(problem.codeSnippets[availableLanguages[0]] || "");
+        }
+      }
+    }
   }, [problem, selectedLanguage]);
 
   const handleLanguageChange = (e) => {
     const lang = e.target.value;
     setSelectedLanguage(lang);
-    setCode(problem.codeSnippets?.[lang] || "");
-  };
+    // Code will be updated by the useEffect above
+  };  
+  
   console.log("Problem:", problem);
   console.log("isProblemLoading:", isProblemLoading);
 
@@ -100,9 +122,11 @@ const ProblemPage = () => {
       </div>
     );
   }
+  
   console.log("Problem:", problem);
   console.log("isProblemLoading:", isProblemLoading);
   console.log("Submissions passed to SubmissionsList:", submissions);
+  
   const renderTabContent = () => {
     switch (activeTab) {
       case "description":
