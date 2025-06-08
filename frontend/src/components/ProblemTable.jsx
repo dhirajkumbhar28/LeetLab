@@ -60,6 +60,11 @@ const ProblemTable = ({ problems }) => {
     cmbmmxuf0000mqn01pq5i7xth: ["Microsoft", "Google"],
     cmbmn08t4000qqn01t9fmplaq: ["Amazon", "Meta"],
     cmbnbjymg0003w8ns8shwel3u: ["Netflix", "Apple"],
+    cmbnc7emz000hw8nsbv4uvebr: ["Microsoft", "Google"],
+    cmbnbnn9z0009w8ns9q8k7r9m: ["Amazon", "Meta"],
+    cmbnc1wgw000dw8ns441s4j9q: ["Netflix", "Apple"],
+    cmbne8ens001lw8nsbrqovy6z: ["Adobe", "Oracle"],
+    cmbnfdz5u0003w81wmebpx0vx: ["Intel", "IBM"]
   };
   return (
     <div className="w-full max-w-6xl mx-auto mt-10">
