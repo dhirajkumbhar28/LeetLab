@@ -55,6 +55,12 @@ const ProblemTable = ({ problems }) => {
     "cmbmm3mzr000gqn010qmzwk8a",
     "cmbmmwkpn000kqn01eedyt577",
   ];
+
+  const companyProblemIds = {
+    cmbmmxuf0000mqn01pq5i7xth: ["Microsoft", "Google"],
+    cmbmn08t4000qqn01t9fmplaq: ["Amazon", "Meta"],
+    cmbnbjymg0003w8ns8shwel3u: ["Netflix", "Apple"],
+  };
   return (
     <div className="w-full max-w-6xl mx-auto mt-10">
       {/* Header with Create Playlist Button */}
@@ -160,14 +166,15 @@ const ProblemTable = ({ problems }) => {
                     </td>
                     <td>
                       <div className="flex flex-wrap gap-1">
-                        {(problem.companys || []).map((company, idx) => (
+                        {/* Replace the existing company mapping with this */}
+                        {companyProblemIds[problem.id]?.map((company, idx) => (
                           <span
                             key={idx}
                             className="badge badge-outline badge-primary text-xs font-bold"
                           >
                             {company}
                           </span>
-                        ))}
+                        )) || []}
                       </div>
                     </td>
                     <td>
