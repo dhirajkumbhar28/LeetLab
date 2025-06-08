@@ -48,6 +48,11 @@ const ProblemTable = ({ problems }) => {
   const handleDelete = () => {};
 
   const handleAddToPlaylist = () => {};
+ const demoProblemIds = [
+    "cmbmeclhl0002pt010sq9i7gg",
+    "cmbmm3mzr000gqn010qmzwk8a",
+    "cmbmmwkpn000kqn01eedyt577",
+  ];
 
   return (
     <div className="w-full max-w-6xl mx-auto mt-10">
@@ -125,13 +130,20 @@ const ProblemTable = ({ problems }) => {
                       />
                     </td>
                     <td>
-                      <Link
-                        to={`/problem/${problem.id}`}
-                        className="font-semibold hover:underline"
-                      >
-                        {problem.title}
-                      </Link>
-                    </td>
+  <div className="flex items-center gap-2">
+    <Link
+      to={`/problem/${problem.id}`}
+      className="font-semibold hover:underline"
+    >
+      {problem.title}
+    </Link>
+    {demoProblemIds.includes(problem.id) && (
+      <span className="badge badge-info badge-sm text-xs">
+        demo
+      </span>
+    )}
+  </div>
+</td>
                     <td>
                       <div className="flex flex-wrap gap-1">
                         {(problem.tags || []).map((tag, idx) => (
