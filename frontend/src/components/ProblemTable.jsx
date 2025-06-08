@@ -51,6 +51,7 @@ const ProblemTable = ({ problems }) => {
 
  
   const demoProblemIds = [
+    "cmbmeclhl0002pt010sq9i7gg",
     "cmbmm3mzr000gqn010qmzwk8a",
     "cmbmmwkpn000kqn01eedyt577",
   ];
@@ -145,7 +146,18 @@ const ProblemTable = ({ problems }) => {
                         )}
                       </div>
                     </td>
-                    
+                    <td>
+                      <div className="flex flex-wrap gap-1">
+                        {(problem.companys || []).map((company, idx) => (
+                          <span
+                            key={idx}
+                            className="badge badge-outline badge-primary text-xs font-bold"
+                          >
+                            {company}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
                     <td>
                       <div className="flex flex-wrap gap-1">
                         {(problem.tags || []).map((tag, idx) => (
